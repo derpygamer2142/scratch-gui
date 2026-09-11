@@ -325,6 +325,50 @@ const DisableCompiler = props => (
     />
 );
 
+const DisableCast = props => (
+    <BooleanSetting
+        {...props}
+        label={
+            <FormattedMessage
+                defaultMessage="Disable Casting"
+                description="Disable Casting setting"
+                id="tw.settingsModal.disableCast"
+            />
+        }
+        help={
+            <FormattedMessage
+                // eslint-disable-next-line max-len
+                defaultMessage="Disables the compiler casting the types of most input blocks. May give some speed improvements in some projects that handle types carefully. Otherwise, you should never enable this."
+                description="Disable casting help"
+                id="tw.settingsModal.disableCastHelp"
+            />
+        }
+        slug="disable-cast"
+    />
+);
+
+const RelaxedMath = props => (
+    <BooleanSetting
+        {...props}
+        label={
+            <FormattedMessage
+                defaultMessage="Relaxed Math"
+                description="Relaxed Math setting"
+                id="tw.settingsModal.relaxedMath"
+            />
+        }
+        help={
+            <FormattedMessage
+                // eslint-disable-next-line max-len
+                defaultMessage="Makes the compiler less likely to assume a math operation is NaN. This may break projects that don't handle math carefully!"
+                description="Relaxed Math help"
+                id="tw.settingsModal.relaxedMathHelp"
+            />
+        }
+        slug="relaxed-math"
+    />
+); 
+
 const CustomStageSize = ({
     customStageSizeEnabled,
     stageWidth,
@@ -499,6 +543,14 @@ const SettingsModalComponent = props => (
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}
             />
+            <DisableCast
+                value={props.disableCast}
+                onChange={props.onDisableCastChange}
+            />
+            <RelaxedMath
+                value={props.relaxedMath}
+                onChange={props.onRelaxedMathChange}
+            />
             {!props.isEmbedded && (
                 <StoreProjectOptions
                     {...props}
@@ -528,7 +580,9 @@ SettingsModalComponent.propTypes = {
     warpTimer: PropTypes.bool,
     onWarpTimerChange: PropTypes.func,
     disableCompiler: PropTypes.bool,
-    onDisableCompilerChange: PropTypes.func
+    onDisableCompilerChange: PropTypes.func,
+    disableCast: PropTypes.bool,
+    onDisableCastChange: PropTypes.func
 };
 
 export default injectIntl(SettingsModalComponent);

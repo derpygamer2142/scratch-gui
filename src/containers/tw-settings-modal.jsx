@@ -30,6 +30,8 @@ class UsernameModal extends React.Component {
             'handleStageWidthChange',
             'handleStageHeightChange',
             'handleDisableCompilerChange',
+            'handleDisableCastChange',
+            'handleRelaxedMathChange',
             'handleStoreProjectOptions'
         ]);
     }
@@ -76,6 +78,16 @@ class UsernameModal extends React.Component {
             enabled: !e.target.checked
         });
     }
+    handleDisableCastChange (e) {
+        this.props.vm.setCompilerOptions({
+            disableCastGlobal: e.target.checked
+        });
+    }
+    handleRelaxedMathChange (e) {
+        this.props.vm.setCompilerOptions({
+            relaxedMath: e.target.checked
+        });
+    }
     handleStageWidthChange (value) {
         this.props.vm.setStageSize(value, this.props.customStageSize.height);
     }
@@ -107,6 +119,8 @@ class UsernameModal extends React.Component {
                 onStageWidthChange={this.handleStageWidthChange}
                 onStageHeightChange={this.handleStageHeightChange}
                 onDisableCompilerChange={this.handleDisableCompilerChange}
+                onDisableCastChange={this.handleDisableCastChange}
+                onRelaxedMathChange={this.handleRelaxedMathChange}
                 stageWidth={this.props.customStageSize.width}
                 stageHeight={this.props.customStageSize.height}
                 customStageSizeEnabled={
@@ -146,7 +160,9 @@ UsernameModal.propTypes = {
         width: PropTypes.number,
         height: PropTypes.number
     }),
-    disableCompiler: PropTypes.bool
+    disableCompiler: PropTypes.bool,
+    disableCast: PropTypes.bool,
+    relaxedMath: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -160,7 +176,9 @@ const mapStateToProps = state => ({
     removeLimits: !state.scratchGui.tw.runtimeOptions.miscLimits,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,
     customStageSize: state.scratchGui.customStageSize,
-    disableCompiler: !state.scratchGui.tw.compilerOptions.enabled
+    disableCompiler: !state.scratchGui.tw.compilerOptions.enabled,
+    disableCast: state.scratchGui.tw.compilerOptions.disableCastGlobal,
+    relaxedMath: state.scratchGui.tw.compilerOptions.relaxedMath
 });
 
 const mapDispatchToProps = dispatch => ({
