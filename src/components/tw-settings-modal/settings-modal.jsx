@@ -325,28 +325,6 @@ const DisableCompiler = props => (
     />
 );
 
-const DisableCast = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="Disable Casting"
-                description="Disable Casting setting"
-                id="tw.settingsModal.disableCast"
-            />
-        }
-        help={
-            <FormattedMessage
-                // eslint-disable-next-line max-len
-                defaultMessage="Disables the compiler casting the types of most input blocks. May give some speed improvements in some projects that handle types carefully. Otherwise, you should never enable this."
-                description="Disable casting help"
-                id="tw.settingsModal.disableCastHelp"
-            />
-        }
-        slug="disable-cast"
-    />
-);
-
 const RelaxedMath = props => (
     <BooleanSetting
         {...props}
@@ -543,10 +521,6 @@ const SettingsModalComponent = props => (
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}
             />
-            <DisableCast
-                value={props.disableCast}
-                onChange={props.onDisableCastChange}
-            />
             <RelaxedMath
                 value={props.relaxedMath}
                 onChange={props.onRelaxedMathChange}
@@ -580,9 +554,7 @@ SettingsModalComponent.propTypes = {
     warpTimer: PropTypes.bool,
     onWarpTimerChange: PropTypes.func,
     disableCompiler: PropTypes.bool,
-    onDisableCompilerChange: PropTypes.func,
-    disableCast: PropTypes.bool,
-    onDisableCastChange: PropTypes.func
+    onDisableCompilerChange: PropTypes.func
 };
 
 export default injectIntl(SettingsModalComponent);
